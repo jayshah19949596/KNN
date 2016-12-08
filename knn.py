@@ -38,19 +38,7 @@ def getDistsnce(trainingSet, testInstance):
 
 	distances.sort(key=lambda element: element[1])
 
-	print('Distance: ' + repr(distances))
 	return distances
-
-
-def getResponse(neighbours):
-	classVotes = {}
-	for x in range(len(neighbours)):
-		response = neighbours[x][-1]
-		print("Value of repsones : "+ repr(response))
-		if response in classVotes:
-			classVotes[response] += 1
-		else:
-			classVotes[response] = 1
 
 def getAccuracy(testSet, predictions):
 	correct = 0
@@ -65,7 +53,6 @@ def main():
 	trainingSet = []
 	testSet = []
 	correctly_classified_test_data=0
-	#distances=[]
 	loadDataset(trainingSet, testSet)
 	print(len(testSet))
 	print('Test set: ' + repr(testSet))
@@ -78,17 +65,17 @@ def main():
 		result = neighbours[0][0][-1]
 		predictions.append(result)
 		print('neighbors ' + repr(neighbours))
-		print('result '+repr(result))
 		print('> predicted=' + repr(result) + ', actual=' + repr(testSet[x][-1]))
-
-		#getResponse(neighbours)
 
 	accuracy = getAccuracy(testSet, predictions)
 	print('Accuracy: ' + repr(accuracy) + '%')
-		#result = getResponse(neighbors)
-		#predictions.append(result)
-		#print('> predicted=' + repr(result) + ', actual=' + repr(testSet[x][-1]))
-	#accuracy = getAccuracy(testSet, predictions)
-	#print('Accuracy: ' + repr(accuracy) + '%')
+	testsetResult = []
+
+	for x in range (len(testSet)):
+		testsetResult.append(testSet[x][-1])
+
+	print("predictions : "+repr(predictions))
+	print("test set    : "+repr(testsetResult))
+
 
 main()
